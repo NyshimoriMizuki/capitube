@@ -1,7 +1,7 @@
-# Tauri + Vanilla TS
+# CapiTube
 
-This template should help get you started developing with Tauri in vanilla HTML, CSS and Typescript.
+This is a PNGtuber app made for streamers inspired on [VeadoTube](https://veado.tube).
 
-## Recommended IDE Setup
+## Features
 
-- [VS Code](https://code.visualstudio.com/) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
+- Transparent background
