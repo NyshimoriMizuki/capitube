@@ -7,10 +7,14 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
+**/target
+**/node_modules
 dist
 dist-ssr
 *.local
+
+**/package-lock.json
+**/Cargo.lock
 
 # Editor directories and files
 .vscode
