@@ -1,0 +1,16 @@
+{
+    "name": "Xisen",
+    "expressionsNumber": 1,
+    "expressions": [
+        {
+            "idle": [
+                "1.png",
+                "2.png"
+            ],
+            "talk": [
+                "3.png",
+                "4.png"
+            ]
+        }
+    ]
+}
