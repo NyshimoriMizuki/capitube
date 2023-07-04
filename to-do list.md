@@ -6,8 +6,8 @@ To try to figure out what I wil need to do and know my progress visually.
 
 ## Alpha(Concept) level
 - [ ] Concept tests
-    - [x] Transparent background `(03/07/2023)`
-    - [ ] Sound input
+    - [x] Transparent background `(30/06/2023)`
+    - [x] Sound input `(04/07/2023)`
     - [ ] Shared front-end
 
 ## Beta level
