@@ -4,11 +4,11 @@ To try to figure out what I wil need to do and know my progress visually.
 
 ***
 
-## Alpha(Concept) level
-- [ ] Concept tests
+## Concept level
+- [x] Concept tests
     - [x] Transparent background `(30/06/2023)`
     - [x] Sound input `(04/07/2023)`
-    - [ ] Shared front-end
+    - [x] Shared front-end `(22/07/2023)`
 
 ## Beta level
 - [ ] Configure model
