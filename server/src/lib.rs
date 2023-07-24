@@ -13,8 +13,9 @@ use rocket::fs::{relative, FileServer};
 use rocket::{Build, Rocket};
 use rocket_dyn_templates::Template;
 
-mod capitube;
+mod model;
 mod routes;
+mod transform;
 
 pub use rocket::main;
 
@@ -24,9 +25,9 @@ pub fn setup(address: &str, port: u16, client_port: u16) -> Rocket<Build> {
         .merge(("port", port));
 
     rocket::custom(config)
-        .attach(capitube::ModelState::fairing(client_port))
+        .attach(model::ModelState::fairing(client_port))
         .attach(Template::fairing())
-        .manage(Mutex::new(capitube::ModelState::default()))
+        .manage(Mutex::new(model::ModelState::default()))
         .mount("/", FileServer::from(relative!("../models")))
         .mount("/", routes![routes::to_model])
         .mount("/capitube", routes![routes::model, routes::events])

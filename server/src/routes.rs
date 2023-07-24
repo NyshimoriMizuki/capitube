@@ -14,7 +14,7 @@ use rocket::{
 };
 use rocket_dyn_templates::{context, Template};
 
-use crate::capitube::ModelState;
+use crate::model::ModelState;
 
 #[get("/")]
 pub fn to_model() -> Redirect {
@@ -38,15 +38,10 @@ pub fn events(model: &State<Mutex<ModelState>>) -> EventStream![Event + '_] {
         let mut delay = interval(Duration::from_millis(50));
         let mut blink_counter = 0;
 
-        let cicle_length = 25;
-        let blink_frame = 5;
-
         loop {
-            blink_counter = if blink_counter >= cicle_length {0} else {
-                println!("reseting counter") ; blink_counter +1
-            };
-            let model_ref = model.lock().await.clone().blink(blink_counter < blink_frame);
-
+            blink_counter += 1;
+            let (model_ref, reset_counter) = model.lock().await.clone().blink(blink_counter as u8);
+            if reset_counter { blink_counter = 0;}
 
             yield Event::json(&model_ref);
             delay.tick().await;
@@ -71,7 +66,7 @@ pub async fn update_model(req: Json<ModelState>, model: &State<Mutex<ModelState>
     }
 
     // state should contain only if is speaking or not (2 speaking, 0 not speak)
-    let (pose, _state, position, proportion) = req.unpack();
-    model_ref.update(pose, position, proportion);
+    let (pose, _state, position, transform) = req.unpack();
+    model_ref.update(pose, position, &transform);
     model_ref.update_state(0);
 }

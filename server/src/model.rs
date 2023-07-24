@@ -4,6 +4,7 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/.
 */
 
+use crate::transform::Transform;
 use rocket::{
     fairing::{Fairing, Info, Kind},
     http::Header,
@@ -17,8 +18,8 @@ pub struct ModelState {
     model: String,
     pose: u8,
     state: u8,
-    position: Vec<u8>,
-    proportion: Vec<u8>,
+    transform: Transform,
+    blink_config: Vec<u8>,
 }
 
 impl ModelState {
@@ -26,41 +27,41 @@ impl ModelState {
         self.model.clone()
     }
 
-    pub fn unpack(&self) -> (u8, u8, Vec<u8>, Vec<u8>) {
+    pub fn unpack(&self) -> (u8, u8, Vec<u8>, Transform) {
         (
             self.pose,
             self.state,
-            self.position.clone(),
-            self.proportion.clone(),
+            self.blink_config.clone(),
+            self.transform.clone(),
         )
     }
 
-    pub fn update(&mut self, pose: u8, position: Vec<u8>, proportion: Vec<u8>) {
+    pub fn update(&mut self, pose: u8, blink_config: Vec<u8>, transform: &Transform) {
         self.pose = pose;
-        self.position = position;
-        self.proportion = proportion;
+        self.blink_config = blink_config;
+        self.transform = transform.clone();
     }
 
     pub fn update_state(&mut self, state: u8) {
         self.state = state;
     }
 
-    pub fn blink(&mut self, is_to_blink: bool) -> ModelState {
-        if is_to_blink {
-            self.state += 1;
-        }
-        self.clone()
-    }
-
     pub fn change_model(&mut self, model: &str) {
         self.model = model.to_string();
     }
 
+    pub fn blink(&mut self, blink_counter: u8) -> (ModelState, bool) {
+        if blink_counter < self.blink_config[1] {
+            self.state += 1;
+        }
+        (self.clone(), blink_counter >= self.blink_config[0])
+    }
+
     pub fn reset(&mut self) {
-        self.pose = 0;
-        self.state = 0;
-        self.position = vec![0, 0];
-        self.proportion = vec![0, 0];
+        self.pose = ModelState::default().pose;
+        self.state = ModelState::default().state;
+        self.transform = ModelState::default().transform;
+        self.blink_config = ModelState::default().blink_config;
     }
 
     pub fn fairing(port: u16) -> ModelFairing {
@@ -71,11 +72,11 @@ impl ModelState {
 impl Default for ModelState {
     fn default() -> Self {
         Self {
-            model: String::from("xisen"),
+            model: String::from("std"),
             pose: 0,
             state: 0,
-            position: vec![0, 0],
-            proportion: vec![0, 0],
+            transform: Transform::default(),
+            blink_config: vec![25, 5],
         }
     }
 }
