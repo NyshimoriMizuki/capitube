@@ -16,9 +16,9 @@ To try to figure out what I wil need to do and know my progress visually.
     - [ ] Set expression
     - [ ] Change model
 - [ ] Working PNG model
-    - [ ] Model frames load
+    - [x] Model frames load
     - [ ] Change on user talking
-    - [ ] Sync OBS and Config sides
+    - [x] Sync OBS and Config sides
 - [ ] Front-end Layout
     - [ ] Configure side layout
         - [ ] Model configuration

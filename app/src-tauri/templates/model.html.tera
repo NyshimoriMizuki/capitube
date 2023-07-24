@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+
+    <style>
+        body {
+            background-color: #ffffff00;
+        }
+
+        .model {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <img class="model" src="/xisen/2.png">
+    <div class="test">content</div>
+    <script>
+        const model = document.querySelector(".model");
+        const source = new EventSource("/capitube/events");
+
+        source.addEventListener("message", (e) => {
+            const data = JSON.parse(e.data);
+            model.src = `/${data.model}/${data.state + 1}.png`;
+        })
+
+    </script>
+</body>
+
+</html>

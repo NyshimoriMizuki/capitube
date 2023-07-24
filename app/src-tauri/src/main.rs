@@ -16,7 +16,7 @@ const ADDRESS: &'static str = "0.0.0.0";
 
 fn main() {
     tauri::async_runtime::spawn(async move {
-        let _server = match server::setup(ADDRESS, PORT).launch().await {
+        let _server = match server::setup(ADDRESS, PORT, 1424).launch().await {
             Ok(s) => s,
             Err(e) => panic!("{}", e),
         };
