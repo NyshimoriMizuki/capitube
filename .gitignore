@@ -7,9 +7,10 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+.art-files
 **/target
 **/node_modules
-dist
+**/dist
 dist-ssr
 *.local
 
