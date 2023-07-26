@@ -13,6 +13,10 @@ For now, CapiTube will by inplemented, but the features that it will certainly h
 
 ***
 
+## Associated repositories
+ - [CapiTube-Web](https://github.com/NyshimoriMizuki/capitube-web)
+ - [Capitube-Tests](https://github.com/NyshimoriMizuki/capitube-tests)
+
 ## Compile by yourself.
 If you want to compile the CapiTube yourself, you will need to:
  - Follow the [Tauri prerequisites](https://tauri.app/v1/guides/getting-started/prerequisites)
